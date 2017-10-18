@@ -15,9 +15,13 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 6- Enjoy your streaming on VLC
 
 
+
 ##SUPPORTED SITES:
+
 -openload.co -- Fully compatible
+
 -turbovid.me -- Open the site and press on the video to open VLC
+
 
 
 ###Troubleshooting:
