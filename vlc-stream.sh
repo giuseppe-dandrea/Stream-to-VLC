@@ -3,7 +3,7 @@
 arg=$1
 
 if [[ $arg == vlcs:* ]]; then
-	vlc ${arg:5}
+	vlc --http-reconnect ${arg:5}
 else
 	vlc
 fi
