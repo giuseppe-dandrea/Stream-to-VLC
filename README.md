@@ -25,6 +25,7 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 
 
 ###Troubleshooting:
+
 If the openload tab closes before you can authorize the xdg-open, go to the script source code and add "//" at the beginning of this line: "window.close();", then authorize and remember the authorization for xdg-open and uncomment the line.
 
 
