@@ -1,4 +1,4 @@
-##LINUX:
+## LINUX:
 
 1- Add the Tampermonkey extension on chrome
 
@@ -14,18 +14,12 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 
 6- Enjoy your streaming on VLC
 
-
-
-##SUPPORTED SITES:
+## SUPPORTED SITES:
 
 -openload.co -- Fully compatible
 
 -turbovid.me -- Open the site and press on the video to open VLC
 
-
-
-###Troubleshooting:
+### Troubleshooting:
 
 If the openload tab closes before you can authorize the xdg-open, go to the script source code and add "//" at the beginning of this line: "window.close();", then authorize and remember the authorization for xdg-open and uncomment the line.
-
-
