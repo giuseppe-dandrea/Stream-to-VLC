@@ -11,8 +11,11 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 
 ## SUPPORTED SITES:
 
-* openload.co -- Fully compatible
-* turbovid.me -- Open the site and press on the video to open VLC
+* openload.co 	-- Fully compatible
+* flash.to	-- Fully compatible
+* rapidvideo.com	-- Fully compatible
+* wstream.video	-- Open the site and press on the video to open VLC
+* turbovid.me 	-- Open the site and press on the video to open VLC
 
 ### Troubleshooting:
 
