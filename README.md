@@ -7,7 +7,8 @@ x-scheme-handler/vlcs=vlc-stream.desktop
 4. Open "vlc-stream" and change the [username] with the name of your user
 Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 5. Copy both "vlc-stream" files to "home/.local/share/applications"
-6. Enjoy your streaming on VLC
+6. Read the Troubleshooting paragraph
+7. Enjoy your streaming on VLC
 
 ## WINDOWS:
 
@@ -18,7 +19,8 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 5. Add three new  keys "shell", "open" and "command" (See the figures if you have problems) 
 6. Change the Default string value of "command" with the path ["C:\Program Files (x86)\StreamToVLC\vlc_stream.bat" "%1"] (Copy also the quotes)
 7. Now copy "vlc_stream.bat" in the path you wrote at the previous step (You have to create the new "StreamToVLC" folder)
-8. Done! 
+8. Read the Troubleshooting paragraph
+9. Done! 
 
 NB. If the script doesn't work check that the VLC path in the .bat file is the same of your computer. 
 ![alt text](https://github.com/giuseppe-dandrea/Stream-to-VLC/blob/master/img/screen1.png "screen1")
@@ -34,4 +36,4 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 
 ### Troubleshooting:
 
-If the openload tab closes before you can authorize the xdg-open, go to the script source code and add "//" at the beginning of this line: "window.close();", then authorize and remember the authorization for xdg-open and uncomment the line.
+If it's the first time you use the script probably the video tab closes before you can authorize xdg-open. Simply go to the script source code (you can find it in the Tampermonkey dashboard) and add "//" at the beginning of this line: "window.close();", then authorize and remember the authorization for xdg-open and uncomment the line.
