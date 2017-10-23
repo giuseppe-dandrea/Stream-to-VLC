@@ -21,8 +21,8 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 8. Done! 
 
 NB. If the script doesn't work check that the VLC path in the .bat file is the same of your computer. 
-![alt text](image1url "screen1")
-![alt text](image1url "screen2")
+![alt text](https://github.com/giuseppe-dandrea/Stream-to-VLC/blob/master/img/screen1.png "screen1")
+![alt text](https://github.com/giuseppe-dandrea/Stream-to-VLC/blob/master/img/screen2.png "screen2")
 
 ## SUPPORTED SITES:
 
