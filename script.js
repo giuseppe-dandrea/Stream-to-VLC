@@ -61,6 +61,7 @@ function play_url(url) {
     if (url !== null) {
         window.open('vlcs:' + url, '_self');
         new Promise((resolve) => setTimeout(resolve, 200)).then(() => {
+            //Comment the next line to be able  authorize xdg-open
             window.close();
         });
     }
@@ -70,10 +71,7 @@ function wait_until_video_click() {
     new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
         if ($('video')[0].src.indexOf('http') != -1) {
             url = $('video')[0].src;
-            window.open('vlcs:' + url, '_self');
-            new Promise((resolve) => setTimeout(resolve, 200)).then(() => {
-                window.close();
-    });
+            play_url(url);
         } else {
               wait_until_video_click();
         }
