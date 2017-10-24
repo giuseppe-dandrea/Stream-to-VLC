@@ -1,5 +1,7 @@
 # Stream to VLC
 
+![alt text](https://github.com/giuseppe-dandrea/Stream-to-VLC/blob/master/img/StreamToVLC.gif "screen1")
+
 **Table of Contents**
 
 - [Installation](#installation)
