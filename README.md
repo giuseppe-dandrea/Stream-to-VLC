@@ -21,7 +21,7 @@ x-scheme-handler/vlcs=vlc-stream.desktop
 4. Open "vlc-stream" and change the [username] with the name of your user
 Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 5. Copy both "vlc-stream" files to "home/.local/share/applications"
-6. The first time you open a streaming site you will always have to remember choice (if you didn't go see Troubleshooting)
+6. The first time you open a streaming site you have to "always remember" choice (if you didn't go see Troubleshooting)
 7. Enjoy your streaming on VLC
 
 ### WINDOWS:
@@ -33,7 +33,7 @@ Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 5. Add three new  keys "shell", "open" and "command" (See the figures if you have problems) 
 6. Change the Default string value of "command" with the path ["C:\Program Files (x86)\StreamToVLC\vlc_stream.bat" "%1"] (Copy also the quotes)
 7. Now copy "vlc_stream.bat" in the path you wrote at the previous step (You have to create the new "StreamToVLC" folder)
-8. The first time you open a streaming site you will always have to remember choice (if you didn't go see Troubleshooting)
+8. The first time you open a streaming site you have to "always remember" choice (if you didn't go see Troubleshooting)
 9. Done! 
 
 NB. If the script doesn't work check that the VLC path in the .bat file is the same of your computer. 
@@ -50,4 +50,4 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 
 ### Troubleshooting
 
-If you didn't set always remember you have to go to the script source code (you can find it in the Tampermonkey dashboard) and add "//" at the beginning of this line: "window.close();" (row 72), then authorize and remember the authorization to open VLC and uncomment the line.
+If you didn't set "always remember" you have to go to the script source code (you can find it in the Tampermonkey dashboard) and add "//" at the beginning of this line: "window.close();" (row 72), then authorize and remember the authorization to open VLC and uncomment the line.
