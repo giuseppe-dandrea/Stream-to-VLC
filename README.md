@@ -3,9 +3,9 @@
 **Table of Contents**
 
 - [Installation](#installation)
-	- [LINUX:](#linux)
-	- [WINDOWS:](#windows)
-- [Supported Sites:](#supported-sites)
+	- [LINUX](#linux)
+	- [WINDOWS](#windows)
+- [Supported Sites](#supported-sites)
 - [Troubleshooting](#troubleshooting)
 
 ## Installation
