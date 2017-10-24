@@ -2,11 +2,11 @@
 
 **Table of Contents**
 
-- [Installation](#)
-	- [LINUX:](#)
-	- [WINDOWS:](#)
-- [Supported Sites:](#)
-- [Troubleshooting](#)
+- [Installation](#installation)
+	- [LINUX:](#linux)
+	- [WINDOWS:](#windows)
+- [Supported Sites:](#supported-sites)
+- [Troubleshooting](#troubleshooting)
 
 ## Installation
 
