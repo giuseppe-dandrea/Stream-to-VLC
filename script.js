@@ -1,15 +1,16 @@
 // ==UserScript==
 // @name         Openload to VLC(recursion)
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.6
 // @description  Opens VLC from Openload stream
-// @author       mattiadr
+// @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
 // @match        http*://turbovid.me/*
 // @match        http*://www.flashx.to/*
 // @match        http*://www.rapidvideo.com/*
 // @match        http*://wstream.video/*
 // @grant        window.close
+// @grant        GM_openInTab
 // ==/UserScript==
 
 var url = null;
@@ -22,19 +23,19 @@ if (window.location.href.indexOf('openload.co') != -1) {
 else if (window.location.href.indexOf('turbovid.me') != -1) {
     $('html').removeClass(" js ");
     if ($('#video-content').size() === 0) {
-        $('#container > h2').append("<h1 style=\"color:red;\">ATTENDI E CLICCA SUL BOTTONE</h1>");
+        $('#container > h2').append("<h1 style=\"color:red;\">WAIT AND CLICK ON BUTTON</h1>");
         //new Promise((resolve) => setTimeout(resolve, 9000)).then(() => {
         //    $('#btn_download').trigger('click');
         //});
     } else {
-        $('#content > h2').append("<h1 style=\"color:red;\">CLICCARE SUL VIDEO PER FAR PARTIRE VLC</h1>");
+        $('#content > h2').append("<h1 style=\"color:red;\">CLICK ON VIDEO TO START VLC</h1>");
         wait_until_video_click();
         }
     }
 
 else if (window.location.href.indexOf('flashx.to') != -1) {
     if ($('video').size() === 0) {
-        $('#main > center > h2').append("<h1 style=\"color:red;\">ATTENDI, IL PULSANTE VERRA' PREMUTO AL POSTO TUO</h1>");
+        $('#main > center > h2').append("<h1 style=\"color:red;\">WAIT, THE BUTTON WILL BE PRESSED AUTOMATICALLY</h1>");
         new Promise((resolve) => setTimeout(resolve, 6000)).then(() => {
             $('#btn_download').trigger('click');
         });
@@ -50,7 +51,7 @@ else if (window.location.href.indexOf('rapidvideo.com') != -1) {
 }
 
 else if (window.location.href.indexOf('wstream.video') != -1) {
-    $('#video-content > table > tbody > tr > td:nth-child(1) > h3').append("<h1 style=\"color:red;\">CLICCARE SUL VIDEO PER FAR PARTIRE VLC</h1>");
+    $('#video-content > table > tbody > tr > td:nth-child(1) > h3').append("<h1 style=\"color:red;\">CLICK ON VIDEO TO START VLC</h1>");
     wait_until_video_click();
 }
 
