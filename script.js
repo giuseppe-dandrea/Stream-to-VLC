@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      0.7
+// @version      0.8
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
 // @match        http*://turbovid.me/*
 // @match        http*://www.flashx.to/*
+// @match        http*://www.flashx.tv/*
 // @match        http*://www.rapidvideo.com/*
 // @match        http*://wstream.video/*
 // @grant        window.close
@@ -35,7 +36,7 @@ else if (window.location.href.indexOf('turbovid.me') != -1) {
 		}
 	}
 
-else if (window.location.href.indexOf('flashx.to') != -1) {
+else if (window.location.href.indexOf('flashx.to') != -1 || window.location.href.indexOf('flashx.tv') != -1) {
 	if ($('video').size() === 0) {
 		$('#main > center > h2').append("<h1 style=\"color:red;\">WAIT, THE BUTTON WILL BE PRESSED AUTOMATICALLY</h1>");
 		new Promise((resolve) => setTimeout(resolve, 6000)).then(() => {
