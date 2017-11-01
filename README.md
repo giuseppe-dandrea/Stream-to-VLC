@@ -18,7 +18,7 @@
 2. Download the script from: <https://greasyfork.org/en/scripts/34206-stream-to-vlc>
 3. Go to "home/.local/share/applications" and add the following line to "mimeapps.list"
 x-scheme-handler/vlcs=vlc-stream.desktop
-4. Open "vlc-stream" and change the [username] with the name of your user
+4. Open "vlc-stream.desktop" and change the [username] with the name of your user
 Exec=/home/[username]/.local/share/applications/vlc-stream.sh %u
 5. Copy both "vlc-stream" files to "home/.local/share/applications"
 6. The first time you open a streaming site you have to "always remember" choice (if you didn't go see Troubleshooting)
