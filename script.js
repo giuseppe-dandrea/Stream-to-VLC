@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      0.8
+// @version      0.9
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -25,7 +25,7 @@ if (window.location.href.indexOf('openload.co') != -1) {
 
 else if (window.location.href.indexOf('turbovid.me') != -1) {
 	$('html').removeClass(" js ");
-	if ($('#video-content').size() === 0) {
+	if ($('#video-content').length === 0) {
 		$('#container > h2').append("<h1 style=\"color:red;\">WAIT AND CLICK ON BUTTON</h1>");
 		//new Promise((resolve) => setTimeout(resolve, 9000)).then(() => {
 		//    $('#btn_download').trigger('click');
