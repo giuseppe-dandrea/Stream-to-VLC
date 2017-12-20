@@ -51,3 +51,6 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 ### Troubleshooting
 
 If you didn't set "always remember" you have to go to the script source code (you can find it in the Tampermonkey dashboard) and add "//" at the beginning of this line: "window.close();" (row 72), then authorize and remember the authorization to open VLC and uncomment the line.
+
+Rapidvideo:
+If the script on rapidvideo works only the first time you open the site, you have to disable your Adblocker on rapidvideo in order to make it works
