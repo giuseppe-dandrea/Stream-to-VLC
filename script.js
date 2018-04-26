@@ -11,6 +11,7 @@
 // @match        http*://www.flashx.sx/*
 // @match        http*://www.rapidvideo.com/*
 // @match        http*://wstream.video/*
+// @match        www.video.mediaset.it/*
 // @grant        window.close
 // @grant        GM_openInTab
 // @grant        GM_getValue
@@ -66,6 +67,11 @@ else if (window.location.href.indexOf('wstream.video') != -1) {
 	//$('#video-content > table > tbody > tr > td:nth-child(1) > h3').append("<h1 style=\"color:red;\">CLICK ON VIDEO TO START VLC</h1>");
 	wait_until_video_click();
 }
+else if (window.location.href.indexOf('video.mediaset.it') != -1) {
+    new Promise((resolve) => setTimeout(resolve, 3000)).then(() => {
+        wait_until_mediaset_ready();
+    });
+}
 
 
 play_url(url);
@@ -92,6 +98,17 @@ function wait_until_video_click() {
 			play_url(url);
 		} else {
 			  wait_until_video_click();
+		}
+	});
+}
+
+function wait_until_mediaset_ready() {
+	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+		if ($('video > source')[0].src.indexOf('http') != -1) {
+			url = $('video > source')[0].src;
+			play_url(url);
+		} else {
+			  wait_until_mediaset_ready();
 		}
 	});
 }
