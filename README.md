@@ -46,6 +46,7 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 * rapidvideo.com	-- Fully compatible
 * wstream.video		-- Fully compatible
 * turbovid.me		-- Fully compatible
+* video.mediaset.it	-- Fully compatible
 * flashx.to/tv/sx	-- Open the site and press on the video to open VLC
 
 ### Troubleshooting
