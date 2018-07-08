@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      2.0
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -18,16 +18,62 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // ==/UserScript==
+
 (function() {
 
-var url = null;
+/* global vars */
+/*******************************************************************************************************************************************************************/
+let url = null;
 
-if (window.location.href.indexOf('openload.co') != -1) {
+/* helper functions */
+/*******************************************************************************************************************************************************************/
+function play_url(url) {
+	if (url !== null) {
+		window.open('vlcs:' + url, '_self');
+		if (GM_getValue("VLC_first_time", true)) {
+			alert("Please always remember choice or you will need to edit source code (see Readme for more info)");
+			GM_setValue("VLC_first_time", false);
+		} else {
+			new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+				//Comment the next line to be able  authorize xdg-open
+				window.close();
+			});
+		}
+	}
+}
+
+function wait_until_video_click() {
+	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+		if ($('video')[0].src.indexOf('http') != -1) {
+			url = $('video')[0].src;
+			play_url(url);
+		} else {
+			wait_until_video_click();
+		}
+	});
+}
+
+function wait_until_mediaset_ready() {
+	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+		if ($('video > source')[0].src.indexOf('http') != -1) {
+			url = $('video > source')[0].src;
+			play_url(url);
+		} else {
+			wait_until_mediaset_ready();
+		}
+	});
+}
+
+/* pages functions */
+/*******************************************************************************************************************************************************************/
+let page = {};
+
+page['openload.co'] = function() {
 	$('#videooverlay').trigger('click');
 	url = $('#olvideo_html5_api')[0].src;
 }
 
-else if (window.location.href.indexOf('turbovid.me') != -1) {
+page['turbovid.me'] = function() {
 	$('html').removeClass(" js ");
 	if ($('#video-content').length === 0) {
 		//$('#container > h2').append("<h1 style=\"color:red;\">WAIT AND CLICK ON BUTTON</h1>");
@@ -38,10 +84,10 @@ else if (window.location.href.indexOf('turbovid.me') != -1) {
 	} else {
 		//$('#content > h2').append("<h1 style=\"color:red;\">CLICK ON VIDEO TO START VLC</h1>");
 		wait_until_video_click();
-		}
 	}
+}
 
-else if (window.location.href.indexOf('flashx.to') != -1 || window.location.href.indexOf('flashx.tv') != -1 || window.location.href.indexOf('flashx.sx') != -1) {
+page['flashx.to'] = function() {
 	if ($('video').size() === 0) {
 		$('#main > center > h2').append("<h1 style=\"color:red;\">WAIT, THE BUTTON WILL BE PRESSED AUTOMATICALLY</h1>");
 		new Promise((resolve) => setTimeout(resolve, 6000)).then(() => {
@@ -53,67 +99,47 @@ else if (window.location.href.indexOf('flashx.to') != -1 || window.location.href
 			play_url(url);
 		});
 	}
-    if (window.location.href.indexOf('flashx.sx') != -1) {
-        $('body').append("<h1 id=\"info\" style=\"color:red;padding:20px\">CLICK ON VIDEO (until the ads end) TO START VLC.</h1>");
-        $("#info").append("<h1 style=\"color:lime;padding:120px;font-size:15px;\">Remember to close the tab if the video is in an iframe, because the script cannot close tabs from iframes and probably there is a MINER in the site</h1>");
-        $('body > center > div > div:nth-child(2) > div.BJPPopAdsOverlay').remove();
-        wait_until_video_click();
-        }
 }
-else if (window.location.href.indexOf('rapidvideo.com') != -1) {
+
+page['flashx.tv'] = page['flashx.to'];
+
+page['flashx.sx'] = function() {
+	page['flashx.to']();
+
+	$('body').append("<h1 id=\"info\" style=\"color:red;padding:20px\">CLICK ON VIDEO (until the ads end) TO START VLC.</h1>");
+	$("#info").append("<h1 style=\"color:lime;padding:120px;font-size:15px;\">Remember to close the tab if the video is in an iframe, because the script cannot close tabs from iframes and probably there is a MINER in the site</h1>");
+	$('body > center > div > div:nth-child(2) > div.BJPPopAdsOverlay').remove();
+	wait_until_video_click();
+}
+
+page['rapidvideo.com'] = function() {
 	url = $('video')[0].src;
 }
 
-else if (window.location.href.indexOf('wstream.video') != -1) {
+page['wstream.video'] = function() {
 	//$('#video-content > table > tbody > tr > td:nth-child(1) > h3').append("<h1 style=\"color:red;\">CLICK ON VIDEO TO START VLC</h1>");
 	wait_until_video_click();
 }
-else if (window.location.href.indexOf('video.mediaset.it') != -1) {
-    new Promise((resolve) => setTimeout(resolve, 3000)).then(() => {
-        wait_until_mediaset_ready();
-    });
-}
-else if (window.location.href.indexOf('speedvideo.net') != -1) {
-    wait_until_video_click();
+
+page['video.mediaset.it'] = function() {
+	new Promise((resolve) => setTimeout(resolve, 3000)).then(() => {
+		wait_until_mediaset_ready();
+	});
 }
 
+page['speedvideo.net'] = function() {
+	wait_until_video_click();
+}
 
-play_url(url);
-
-function play_url(url) {
-	if (url !== null) {
-		window.open('vlcs:' + url, '_self');
-        if (GM_getValue("VLC_first_time", true)) {
-            alert("Please always remember choice or you will need to edit source code (see Readme for more info)");
-            GM_setValue("VLC_first_time", false);
-        } else {
-            new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-                //Comment the next line to be able  authorize xdg-open
-                window.close();
-            });
-        }
+/* main */
+/*******************************************************************************************************************************************************************/
+for (let key in page) {
+	// check if the key is inside page and not inherited from parent
+	if (page.hasOwnProperty(key) && window.location.href.indexOf(key) != -1) {
+		page[key]();
+		play_url(url);
+		break;
 	}
 }
 
-function wait_until_video_click() {
-	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-		if ($('video')[0].src.indexOf('http') != -1) {
-			url = $('video')[0].src;
-			play_url(url);
-		} else {
-			  wait_until_video_click();
-		}
-	});
-}
-
-function wait_until_mediaset_ready() {
-	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-		if ($('video > source')[0].src.indexOf('http') != -1) {
-			url = $('video > source')[0].src;
-			play_url(url);
-		} else {
-			  wait_until_mediaset_ready();
-		}
-	});
-}
 })();
