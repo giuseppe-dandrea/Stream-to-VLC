@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -12,6 +12,7 @@
 // @match        http*://www.rapidvideo.com/*
 // @match        http*://wstream.video/*
 // @match        www.video.mediaset.it/*
+// @match        http*://speedvideo.net/*
 // @grant        window.close
 // @grant        GM_openInTab
 // @grant        GM_getValue
@@ -72,6 +73,9 @@ else if (window.location.href.indexOf('video.mediaset.it') != -1) {
         wait_until_mediaset_ready();
     });
 }
+else if (window.location.href.indexOf('speedvideo.net') != -1) {
+    wait_until_video_click();
+}
 
 
 play_url(url);
@@ -83,7 +87,7 @@ function play_url(url) {
             alert("Please always remember choice or you will need to edit source code (see Readme for more info)");
             GM_setValue("VLC_first_time", false);
         } else {
-            new Promise((resolve) => setTimeout(resolve, 200)).then(() => {
+            new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
                 //Comment the next line to be able  authorize xdg-open
                 window.close();
             });
