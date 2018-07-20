@@ -1,10 +1,12 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
+// @match        http*://openloads.co/*
+// @match        http*://oload.download/*
 // @match        http*://turbovid.me/*
 // @match        http*://www.flashx.to/*
 // @match        http*://www.flashx.tv/*
@@ -29,7 +31,7 @@ let url = null;
 /*******************************************************************************************************************************************************************/
 function play_url(url) {
 	if (url !== null) {
-		window.open('vlcs:' + url, '_self');
+		window.location.href = 'vlcs:' + url;
 		if (GM_getValue("VLC_first_time", true)) {
 			alert("Please always remember choice or you will need to edit source code (see Readme for more info)");
 			GM_setValue("VLC_first_time", false);
@@ -72,6 +74,9 @@ page['openload.co'] = function() {
 	$('#videooverlay').trigger('click');
 	url = $('#olvideo_html5_api')[0].src;
 }
+
+page['openloads.co'] = page['openload.co'];
+page['oload.download'] = page['openload.co'];
 
 page['turbovid.me'] = function() {
 	$('html').removeClass(" js ");
