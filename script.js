@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.1
+// @version      2.2
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -15,6 +15,7 @@
 // @match        http*://wstream.video/*
 // @match        www.video.mediaset.it/*
 // @match        http*://speedvideo.net/*
+// @match        http*://*mp4upload.com/embed*
 // @grant        window.close
 // @grant        GM_openInTab
 // @grant        GM_getValue
@@ -134,6 +135,13 @@ page['video.mediaset.it'] = function() {
 
 page['speedvideo.net'] = function() {
 	wait_until_video_click();
+}
+
+page['mp4upload.com'] = function() {
+	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+		url = $('video')[0].src;
+		play_url(url);
+	});
 }
 
 /* main */

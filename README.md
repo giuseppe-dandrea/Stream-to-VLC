@@ -43,12 +43,15 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 ## Supported Sites:
 
 * openload.co		-- Fully compatible
+* openloads.co		-- Fully compatible
+* oload.download	-- Fully compatible
+* turbovid.me		-- Fully compatible
+* flashx.to/tv/sx	-- Open the site and press on the video to open VLC
 * rapidvideo.com	-- Fully compatible
 * wstream.video		-- Fully compatible
-* turbovid.me		-- Fully compatible
-* speedvideo.net 	-- Fully compatible
 * video.mediaset.it	-- Fully compatible
-* flashx.to/tv/sx	-- Open the site and press on the video to open VLC
+* speedvideo.net	-- Fully compatible
+* mp4upload.com		-- Fully compatible
 
 ### Troubleshooting
 
