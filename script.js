@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.2
+// @version      2.3
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -56,6 +56,15 @@ function wait_until_video_click() {
 	});
 }
 
+function wait_until_wstream_click() {
+	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+        var video = $('video');
+        url = find_valid_url(video);
+        if (url) play_url(url)
+        else wait_until_wstream_click();
+	});
+}
+
 function wait_until_mediaset_ready() {
 	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
 		if ($('video > source')[0].src.indexOf('http') != -1) {
@@ -67,6 +76,14 @@ function wait_until_mediaset_ready() {
 	});
 }
 
+function find_valid_url(video_tag_list) {
+    for (var i = 0; i < video_tag_list.length; i++) {
+        if (video_tag_list[i].src && video_tag_list[i].src.indexOf('http') != -1 ) {
+            return video_tag_list[i].src;
+        }
+    }
+    return false;
+}
 /* pages functions */
 /*******************************************************************************************************************************************************************/
 let page = {};
@@ -124,7 +141,7 @@ page['rapidvideo.com'] = function() {
 
 page['wstream.video'] = function() {
 	//$('#video-content > table > tbody > tr > td:nth-child(1) > h3').append("<h1 style=\"color:red;\">CLICK ON VIDEO TO START VLC</h1>");
-	wait_until_video_click();
+	wait_until_wstream_click();
 }
 
 page['video.mediaset.it'] = function() {
