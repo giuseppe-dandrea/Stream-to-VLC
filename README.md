@@ -14,7 +14,7 @@
 
 ### LINUX:
 
-1. Add the Tampermonkey extension on chrome
+1. Add the Tampermonkey extension on your browser
 2. Download the script from: <https://greasyfork.org/en/scripts/34206-stream-to-vlc>
 3. Go to "home/.local/share/applications" and add the following line to "mimeinfo.cache"
 > x-scheme-handler/vlcs=vlc-stream.desktop;
@@ -26,7 +26,7 @@
 
 ### WINDOWS:
 
-1. Add the Tampermonkey extension on chrome
+1. Add the Tampermonkey extension on your browser
 2. Download the script from: <https://greasyfork.org/en/scripts/34206-stream-to-vlc>
 3. Type "regedit" in the "Run..." command (Windows logo key+R)
 4. Add a "vlcs" key to "HKEY_CLASSES_ROOT" and add a new empty string value "URL Protocol"
