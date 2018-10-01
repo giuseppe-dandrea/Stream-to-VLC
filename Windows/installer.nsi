@@ -4,6 +4,14 @@
 Outfile "StreamToVlcInstaller.exe"
 
 !include LogicLib.nsh
+!include MUI2.nsh
+!define MUI_PAGE_HEADER_TEXT "StreamToVlc installation"
+!define MUI_PAGE_HEADER_SUBTEXT "Choose the folder in which VLC is installed."
+!define MUI_DIRECTORYPAGE_TEXT_TOP "The installer will use the VLC default installation folder. If you installed VLC in another folder click Browse and select another folder. Click Next to continue and follow the instructions to complete the installation."
+!define MUI_DIRECTORYPAGE_TEXT_DESTINATION "VLC Folder"
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_LANGUAGE English
 
 
 Function openLinkNewWindow
@@ -55,10 +63,6 @@ Call openLinkNewWindow
 
 Name "StreamToVlc Installer"
 
-page directory
-Page instfiles
-
-
 !macro VerifyUserIsAdmin
 UserInfo::GetAccountType
 pop $0
@@ -74,23 +78,33 @@ function .onInit
 	!insertmacro VerifyUserIsAdmin
 functionEnd
 
-InstallDir "C:\Program Files\StreamToVlc\"
+InstallDir "C:\Program Files (x86)\VideoLAN\VLC\"
+InstallDirRegKey HKLM "Software\VideoLAN\VLC" "InstallDir" 
  
 # default section
 Section "install"
 	# Files for the install directory - to build the installer, these should be in the same directory as the install script (this file)
 	setOutPath $INSTDIR
+
 	# Files added here should be removed by the uninstaller (see section "uninstall")
 	file "StreamToVlc.bat"
 
+  FileOpen $4 "$INSTDIR\StreamToVlc.bat" a
+  FileSeek $4 0 END
+  FileWrite $4 "$\r$\n" ; we write a new line
+  FileWrite $4 "cd $\"C:\Program Files (x86)\VideoLAN\VLC\$\""
+  FileWrite $4 "$\r$\n" ; we write an extra line
+  FileWrite $4 "start vlc --http-reconnect %argp%"
+  FileClose $4 ; and close the file
+
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
-	writeUninstaller "$INSTDIR\uninstall.exe"
+	writeUninstaller "$INSTDIR\StreamToVlcUninstaller.exe"
  
 
 	WriteRegStr HKCR "vlcs" "URL Protocol" ""
 	WriteRegStr HKCR "vlcs\shell" "" ""
 	WriteRegStr HKCR "vlcs\shell\open" "" ""
-	WriteRegStr HKCR "vlcs\shell\open\command" "" "$\"$INSTDIR\vlc_stream.bat$\" $\"%1$\""
+	WriteRegStr HKCR "vlcs\shell\open\command" "" "$\"$INSTDIR\StreamToVlc.bat$\" $\"%1$\""
 
 	MessageBox MB_OK "Install Tampermonkey extension in your browser"
 	${OpenURL} "https://www.google.com/search?ei=X0OxW-6APcmRsgGpp724DQ&q=tampermonkey+browser+extension&oq=tampermonkey+brows+extension&gs_l=psy-ab.3.0.0i7i30k1j0i8i7i30k1l2.10932.11852.0.12715.6.6.0.0.0.0.97.531.6.6.0....0...1c.1.64.psy-ab..0.6.529...0.0.-3s1uJfUd6U"
@@ -119,8 +133,15 @@ functionEnd
 section "uninstall"
 
 	Delete "$INSTDIR/StreamToVlc.bat"
-	Delete "$INSTDIR/uninstall.exe"
+	Delete "$INSTDIR/StreamToVlcInstaller.exe"
 	rmDir "$INSTDIR"
 
 	DeleteRegkey HKCR "vlcs"
 sectionEnd
+
+
+Function .onVerifyInstDir
+    IfFileExists "$INSTDIR\vlc.exe" FileIsThere
+    Abort ; user can´t go on if "somefile.exe" isn´t present
+    FileIsThere:
+FunctionEnd
