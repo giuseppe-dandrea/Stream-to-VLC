@@ -7,6 +7,8 @@
 - [Installation](#installation)
 	- [LINUX](#linux)
 	- [WINDOWS](#windows)
+		- [Installer](#installer)
+		- [Manual](#manual)
 - [Supported Sites](#supported-sites)
 - [Troubleshooting](#troubleshooting)
 
@@ -26,6 +28,10 @@
 
 ### WINDOWS:
 
+#### Installer:
+Download the installer from: <https://github.com/giuseppe-dandrea/Stream-to-VLC/raw/master/Windows/StreamToVlcInstaller.exe>
+
+#### Manual:
 1. Add the Tampermonkey extension on your browser
 2. Download the script from: <https://greasyfork.org/en/scripts/34206-stream-to-vlc>
 3. Type "regedit" in the "Run..." command (Windows logo key+R)
