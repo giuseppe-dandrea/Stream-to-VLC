@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.3
+// @version      2.4
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -16,6 +16,7 @@
 // @match        www.video.mediaset.it/*
 // @match        http*://speedvideo.net/*
 // @match        http*://*mp4upload.com/embed*
+// @match        http*://didattica.polito.it/portal/pls/portal/sviluppo.videolezioni.vis*
 // @grant        window.close
 // @grant        GM_openInTab
 // @grant        GM_getValue
@@ -27,6 +28,7 @@
 /* global vars */
 /*******************************************************************************************************************************************************************/
 let url = null;
+let suppress_close = false;
 
 /* helper functions */
 /*******************************************************************************************************************************************************************/
@@ -39,7 +41,7 @@ function play_url(url) {
 		} else {
 			new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
 				//Comment the next line to be able  authorize xdg-open
-				window.close();
+				if (!suppress_close) window.close();
 			});
 		}
 	}
@@ -159,6 +161,11 @@ page['mp4upload.com'] = function() {
 		url = $('video')[0].src;
 		play_url(url);
 	});
+}
+
+page['didattica.polito.it'] = function() {
+	url = $('video > source')[0].src;
+	suppress_close = true;
 }
 
 /* main */
