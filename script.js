@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.4
+// @version      2.5
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -60,10 +60,10 @@ function wait_until_video_click() {
 
 function wait_until_wstream_click() {
 	new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-        var video = $('video');
-        url = find_valid_url(video);
-        if (url) play_url(url)
-        else wait_until_wstream_click();
+		var video = $('video');
+		url = find_valid_url(video);
+		if (url) play_url(url)
+		else wait_until_wstream_click();
 	});
 }
 
@@ -79,12 +79,12 @@ function wait_until_mediaset_ready() {
 }
 
 function find_valid_url(video_tag_list) {
-    for (var i = 0; i < video_tag_list.length; i++) {
-        if (video_tag_list[i].src && video_tag_list[i].src.indexOf('http') != -1 ) {
-            return video_tag_list[i].src;
-        }
-    }
-    return false;
+	for (var i = 0; i < video_tag_list.length; i++) {
+		if (video_tag_list[i].src && video_tag_list[i].src.indexOf('http') != -1 ) {
+			return video_tag_list[i].src;
+		}
+	}
+	return false;
 }
 /* pages functions */
 /*******************************************************************************************************************************************************************/
@@ -164,7 +164,13 @@ page['mp4upload.com'] = function() {
 }
 
 page['didattica.polito.it'] = function() {
-	url = $('video > source')[0].src;
+	let vlcButton = $('<button class="btn btn-default btn-sm">PLAY ON VLC</button>');
+	vlcButton.click(function() {
+		let url_ = $('video > source')[0].src;
+		play_url(url_);
+	});
+	$('#btnTag').after(vlcButton);
+	$('#btnTag').after('\n&nbsp;&nbsp;\n');
 	suppress_close = true;
 }
 
