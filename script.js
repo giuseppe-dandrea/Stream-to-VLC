@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.5
+// @version      2.6
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
 // @match        http*://openloads.co/*
 // @match        http*://oload.download/*
+// @match        http*://oload.fun/*
 // @match        http*://turbovid.me/*
 // @match        http*://www.flashx.to/*
 // @match        http*://www.flashx.tv/*
@@ -97,6 +98,7 @@ page['openload.co'] = function() {
 
 page['openloads.co'] = page['openload.co'];
 page['oload.download'] = page['openload.co'];
+page['oload.fun'] = page['openload.co'];
 
 page['turbovid.me'] = function() {
 	$('html').removeClass(" js ");
