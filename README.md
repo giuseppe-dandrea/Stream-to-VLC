@@ -14,7 +14,7 @@
 
 ## Installation
 
-### LINUX:
+### LINUX
 
 1. Add the Tampermonkey extension on your browser
 2. Download the script from: <https://greasyfork.org/en/scripts/34206-stream-to-vlc>
@@ -26,12 +26,12 @@
 6. The first time you open a streaming site you have to "always remember" choice (if you didn't go see Troubleshooting)
 7. Enjoy your streaming on VLC
 
-### WINDOWS:
+### WINDOWS
 
-#### Installer:
+#### Installer
 Download the installer from: <https://github.com/giuseppe-dandrea/Stream-to-VLC/raw/master/Windows/StreamToVlcInstaller.exe>
 
-#### Manual:
+#### Manual
 1. Add the Tampermonkey extension on your browser
 2. Download the script from: <https://greasyfork.org/en/scripts/34206-stream-to-vlc>
 3. Type "regedit" in the "Run..." command (Windows logo key+R)
@@ -46,7 +46,7 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 ![alt text](https://github.com/giuseppe-dandrea/Stream-to-VLC/blob/master/img/screen1.png "screen1")
 ![alt text](https://github.com/giuseppe-dandrea/Stream-to-VLC/blob/master/img/screen2.png "screen2")
 
-## Supported Sites:
+## Supported Sites
 
 * openload.co		-- Fully compatible
 * openloads.co		-- Fully compatible
@@ -63,7 +63,7 @@ NB. If the script doesn't work check that the VLC path in the .bat file is the s
 
 If you didn't set "always remember" you have to go to the script source code (you can find it in the Tampermonkey dashboard) and add "//" at the beginning of this line: "window.close();" (row 88), then authorize and remember the authorization to open VLC and uncomment the line.
 
-#### Rapidvideo:
+#### Rapidvideo
 If the script on rapidvideo works only the first time you open the site, you have to disable your Adblocker on rapidvideo in order to make it works
 
 #### Openload
