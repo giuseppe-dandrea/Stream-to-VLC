@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Stream to VLC
 // @namespace    http://tampermonkey.net/
-// @version      2.6
+// @version      2.7
 // @description  Opens VLC from streaming sites
 // @author       mattiadr, giuseppe-dandrea
 // @match        http*://openload.co/*
@@ -18,6 +18,7 @@
 // @match        http*://speedvideo.net/*
 // @match        http*://*mp4upload.com/embed*
 // @match        http*://didattica.polito.it/portal/pls/portal/sviluppo.videolezioni.vis*
+// @match        http*://didattica.polito.it/portal/pls/portal/sviluppo.pagina_corso.main?t=3&p_sottopagina=VC*
 // @grant        window.close
 // @grant        GM_openInTab
 // @grant        GM_getValue
@@ -173,6 +174,7 @@ page['didattica.polito.it'] = function() {
 	});
 	$('#btnTag').after(vlcButton);
 	$('#btnTag').after('\n&nbsp;&nbsp;\n');
+	$('#portlet_corso_container > div > div > div.container-fluid > div > div.col-md-8 > div > div').append(vlcButton);
 	suppress_close = true;
 }
 
